@@ -4,7 +4,7 @@ contract Payroll {
     uint salary = 1 ether;
     address employee;
     address owner;
-    uint payDuration = 30 days;
+    uint constant payDuration = 30 days;
     uint lastPayday = now;
     
     modifier onlyOwnerOf() {
@@ -40,7 +40,7 @@ contract Payroll {
         return calculateRunway() > 0;
     }
     
-    function getPaid() public payable {
+    function getPaid() public {
         require(msg.sender == employee);
         uint nextPayday = lastPayday + payDuration;
         require(nextPayday <= now);
